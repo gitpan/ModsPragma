@@ -4,7 +4,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
 # $Format: " VERSION => '$modsRelease$',"$
- VERSION => '0.003',
+ VERSION => '0.004',
               NAME => 'ModsPragma',
 	      PREREQ_PM => {},
 #	      EXE_FILES => []

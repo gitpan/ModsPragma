@@ -1,4 +1,4 @@
-# $Id: mods.t 1.6 Tue, 09 Sep 1997 17:07:06 -0400 jesse $ -*- Perl -*-
+# $Id: mods.t 1.7 Fri, 12 Sep 1997 23:21:20 -0400 jesse $ -*- Perl -*-
 
 use strict;
 
@@ -11,6 +11,8 @@ use mods q{			# Leading & trailing w.s.
 };
 
 test {
+  comm 'Testing version';
+  import mods 0.003;
   comm 'Dividing 5/2';
   my $foo=5/2;
   ok $foo==2;

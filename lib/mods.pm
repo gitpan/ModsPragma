@@ -1,11 +1,12 @@
-# $Id: mods.pm 1.9 Mon, 19 May 1997 23:48:31 -0400 jesse $
+# $Id: mods.pm 1.11 Fri, 12 Sep 1997 23:21:20 -0400 jesse $
 
 package mods;
 use strict;
 use integer;
+use vars qw($VERSION);
 
 # $Format: "$VERSION='$modsRelease$';"$
-$VERSION='0.003';
+$VERSION='0.004';
 
 # $list: undef ~ use Foo; [] ~ use Foo(); [...] ~ use Foo (...)
 sub sim_use($$;$$) {
@@ -25,6 +26,14 @@ sub sim_use($$;$$) {
 
 sub import {
   my ($class, @in)=@_;
+  if (@in==1 and $in[0] !~ /[^0-9.]/) {
+    if ($VERSION < $in[0]) {
+      require Carp;
+      Carp::croak "mods $in[0] requested, only have $VERSION";
+    } else {
+      return;
+    }
+  }
   my $callpack=caller;
   my $in=join "\n", @in;
   unless ($in =~ s/^\s*~//) {
@@ -193,6 +202,6 @@ Jesse Glick, B<jglick@sig.bsh.com>
 =head1 REVISION
 
 X<$Format: "F<$Source$> last modified $Date$ release $modsRelease$. $Copyright$"$>
-F<mods/lib/mods.pm> last modified Mon, 19 May 1997 23:48:31 -0400 release 0.003. Copyright (c) 1997 Strategic Interactive Group. All rights reserved. This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
+F<mods/lib/mods.pm> last modified Fri, 12 Sep 1997 23:21:20 -0400 release 0.004. Copyright (c) 1997 Strategic Interactive Group. All rights reserved. This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
 
 =cut
